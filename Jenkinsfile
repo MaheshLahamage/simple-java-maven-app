@@ -14,8 +14,13 @@ pipeline {
             }
         }
         stage('Build'){
-            steps{
-                echo "This is a minimal pipline"
+            steps {
+                sh 'mvn install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
     }
